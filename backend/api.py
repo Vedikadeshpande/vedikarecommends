@@ -1,13 +1,18 @@
-"""
-vedikarecommends API — FastAPI backend for emotion-based music recommendation.
-"""
-
-from fastapi import FastAPI, HTTPException
+import time
+import logging
+from fastapi import FastAPI, HTTPException, Request
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 
-from MoodClassifier import predict_mood
-from recommender import get_recommended_track, df
+from backend.MoodClassifier import predict_mood
+from backend.recommender import get_recommended_track, df
+
+# Configure logging
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s [%(levelname)s] %(name)s: %(message)s"
+)
+logger = logging.getLogger("APIServer")
 
 app = FastAPI(
     title="vedikarecommends API",
@@ -15,11 +20,23 @@ app = FastAPI(
     version="1.0.0",
 )
 
+@app.middleware("http")
+async def add_process_time_header(request: Request, call_next):
+    start_time = time.time()
+    response = await call_next(request)
+    process_time = time.time() - start_time
+    response.headers["X-Process-Time"] = str(process_time)
+    logger.info(
+        f"{request.method} {request.url.path} "
+        f"completed in {process_time:.4f}s with status {response.status_code}"
+    )
+    return response
+
 # CORS middleware configuration
 # Allows communication with the local Next.js client
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000"],
+    allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],

@@ -11,8 +11,12 @@ logging.basicConfig(
 )
 logger = logging.getLogger("MoodClassifier")
 
-MODEL_PATH = "model.pkl"
-VECTORIZER_PATH = "vectorizer.pkl"
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+MODEL_PATH = os.path.join(BASE_DIR, "models", "model.pkl")
+VECTORIZER_PATH = os.path.join(BASE_DIR, "models", "vectorizer.pkl")
+TRAIN_DATA_PATH = os.path.join(BASE_DIR, "data", "train.txt")
+VAL_DATA_PATH = os.path.join(BASE_DIR, "data", "val.txt")
+TEST_DATA_PATH = os.path.join(BASE_DIR, "data", "test.txt")
 
 # Global placeholders for the model and vectorizer
 _model: Optional[Any] = None
@@ -113,17 +117,22 @@ def train_model() -> None:
     logger.info("Starting model training pipeline...")
     
     # Verify dataset files exist
-    for filename in ["train.txt", "val.txt", "test.txt"]:
-        if not os.path.exists(filename):
+    dataset_configs = [
+        ("train.txt", TRAIN_DATA_PATH),
+        ("val.txt", VAL_DATA_PATH),
+        ("test.txt", TEST_DATA_PATH)
+    ]
+    for filename, filepath in dataset_configs:
+        if not os.path.exists(filepath):
             raise FileNotFoundError(
-                f"Missing dataset '{filename}' required for training. "
-                "Ensure train.txt, val.txt, and test.txt are in the root directory."
+                f"Missing dataset '{filename}' at '{filepath}' required for training. "
+                "Ensure train.txt, val.txt, and test.txt are in the 'data/' directory."
             )
 
     logger.info("Loading datasets into memory...")
-    train_df = pd.read_csv("train.txt", sep=";", names=["text", "emotion"])
-    val_df = pd.read_csv("val.txt", sep=";", names=["text", "emotion"])
-    test_df = pd.read_csv("test.txt", sep=";", names=["text", "emotion"])
+    train_df = pd.read_csv(TRAIN_DATA_PATH, sep=";", names=["text", "emotion"])
+    val_df = pd.read_csv(VAL_DATA_PATH, sep=";", names=["text", "emotion"])
+    test_df = pd.read_csv(TEST_DATA_PATH, sep=";", names=["text", "emotion"])
 
     logger.info("Preprocessing text datasets...")
     # Apply standardized cleaning to all datasets
@@ -151,6 +160,11 @@ def train_model() -> None:
     X_test_vec = _vectorizer.transform(X_test)
     test_accuracy = _model.score(X_test_vec, y_test)
     logger.info(f"Model test accuracy: {test_accuracy:.4f}")
+
+    # Create models directory if it doesn't exist
+    models_dir = os.path.dirname(MODEL_PATH)
+    if not os.path.exists(models_dir):
+        os.makedirs(models_dir, exist_ok=True)
 
     logger.info(f"Saving serialized assets to '{MODEL_PATH}' and '{VECTORIZER_PATH}'...")
     joblib.dump(_model, MODEL_PATH)

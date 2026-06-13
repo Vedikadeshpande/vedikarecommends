@@ -1,8 +1,21 @@
+import os
 import random
+import logging
 import pandas as pd
+from typing import Optional
 
-# Load the songs dataset
-df = pd.read_csv("songsDataSet.csv", encoding="utf-8")
+logger = logging.getLogger("Recommender")
+
+# Load the songs dataset from the 'data' directory relative to this file
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+DATASET_PATH = os.path.join(BASE_DIR, "data", "songsDataSet.csv")
+
+if not os.path.exists(DATASET_PATH):
+    logger.error(f"Missing track dataset file at: '{DATASET_PATH}'")
+    raise FileNotFoundError(f"Missing track dataset file at: '{DATASET_PATH}'")
+
+logger.info(f"Loading song database from '{DATASET_PATH}'...")
+df = pd.read_csv(DATASET_PATH, encoding="utf-8")
 
 # Clean column headers
 df.columns = df.columns.str.strip()
@@ -12,7 +25,7 @@ df['mood'] = df['mood'].str.strip().str.lower()
 df['genre'] = df['genre'].str.strip().str.lower()
 
 
-def get_recommended_track(mood: str, genre: str) -> str | None:
+def get_recommended_track(mood: str, genre: str) -> Optional[str]:
     """
     Search the dataset for tracks matching the specified mood and genre.
     Returns:
@@ -72,7 +85,7 @@ def generate_embed_html(track_id: str) -> str:
 </html>"""
 
 
-def get_recommendation(mood: str, genre: str) -> str | None:
+def get_recommendation(mood: str, genre: str) -> Optional[str]:
     """
     Backwards-compatible recommendation helper.
     Finds a matching track and generates the Spotify embed HTML.
