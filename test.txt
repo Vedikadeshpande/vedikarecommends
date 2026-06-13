@@ -1716,3 +1716,63 @@ feeling good;joy
 i feel like im not important to anyone;sadness
 i feel like im not important;sadness
 im sad;sadness
+i feel incredibly loved and happy today;love
+i am feeling so romantic and sweet tonight;love
+feeling so much love and warmth from my partner;love
+i feel a deep love and connection to my family;love
+i am feeling very affectionate and loving today;love
+feeling loved is such a beautiful and warm emotion;love
+i feel so blessed to have such a loving partner;love
+i am in love with this beautiful and romantic song;love
+feeling romantic vibes and listening to sweet music;love
+i feel loved, protected, and cherished;love
+i am feeling so much love in my heart today;love
+feeling romantic under the beautiful moonlight;love
+i feel a deep, unconditional love for my friends;love
+i am feeling very fond and affectionate towards you;love
+feeling loved makes me feel incredibly happy and complete;love
+i feel so cherished, loved, and supported;love
+i am feeling romantic and excited about our future;love
+feeling so close, connected, and in love tonight;love
+i feel loved and safe whenever we are together;love
+i am feeling so much warmth, love, and joy;love
+feeling a sweet and romantic connection today;love
+i feel passionate and loving towards my partner;love
+i am feeling so loved and appreciated by everyone;love
+feeling romantic walks in the park are so lovely;love
+i feel a strong, deep bond of love with you;love
+i am feeling incredibly lucky and loved today;love
+feeling loved is the greatest comfort in life;love
+i feel a sweet, gentle love in my heart today;love
+i am feeling so romantic, happy, and hopeful;love
+feeling loved and safe is all i need;love
+feeling relaxed and chill on this peaceful day;chill
+i am feeling so chill, calm, and relaxed;chill
+just chilling and enjoying a quiet afternoon;chill
+feeling completely relaxed and stress-free today;chill
+i feel so chill listening to this quiet music;chill
+just taking it easy and chilling out at home;chill
+feeling a very relaxed and laid-back vibe;chill
+i am feeling very chill and content right now;chill
+feeling serene, peaceful, and totally chill;chill
+just chilling with a good book and warm tea;chill
+feeling relaxed and unwinding after work;chill
+i feel so chill and cozy in my room;chill
+just letting go of all worries and feeling relaxed;chill
+feeling a calm and peaceful state of mind today;chill
+i am feeling so chill and relaxed by the lake;chill
+just chilling out and letting the worries go;chill
+feeling relaxed, refreshed, and completely calm;chill
+i feel so chill and mellow on this quiet day;chill
+just taking things slow and enjoying a chill day;chill
+feeling a serene and relaxed atmosphere;chill
+i am feeling so chill and comfortable here;chill
+just chilling and letting my mind rest peacefully;chill
+feeling relaxed and destressed after a quiet walk;chill
+i feel so chill and happy doing absolutely nothing today;chill
+just enjoying a chill and laid-back afternoon;chill
+feeling relaxed and at peace with everything;chill
+i am feeling very chill, calm, and happy;chill
+just chilling with friends and laughing;chill
+feeling a peaceful, relaxed, and happy energy;chill
+i feel so chill and content with my decisions;chill

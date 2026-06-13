@@ -1,30 +1,43 @@
-import pandas as pd
 import random
+import pandas as pd
 
-# Load your CSV file
+# Load the songs dataset
 df = pd.read_csv("songsDataSet.csv", encoding="utf-8")
 
-# Strip whitespace from column names only
+# Clean column headers
 df.columns = df.columns.str.strip()
 
-# Clean only 'mood' and 'genre' columns for matching (keep 'track_id' untouched)
+# Clean mood and genre values to ensure matching works properly
 df['mood'] = df['mood'].str.strip().str.lower()
 df['genre'] = df['genre'].str.strip().str.lower()
 
 
-def get_recommendation(mood, genre):
-    # Filter for rows matching the mood and genre
-    match = df[(df['mood'] == mood.strip().lower()) &
-               (df['genre'] == genre.strip().lower())]
-
-    if match.empty:
+def get_recommended_track(mood: str, genre: str) -> str | None:
+    """
+    Search the dataset for tracks matching the specified mood and genre.
+    Returns:
+        str: A randomly selected Spotify track ID if matches exist.
+        None: If no tracks match the criteria.
+    """
+    cleaned_mood = mood.strip().lower()
+    cleaned_genre = genre.strip().lower()
+    
+    # Filter matching tracks
+    matches = df[(df['mood'] == cleaned_mood) & (df['genre'] == cleaned_genre)]
+    
+    if matches.empty:
         return None
+        
+    # Return a random track ID from the matched results
+    track_ids = matches['track_id'].tolist()
+    return random.choice(track_ids)
 
-    # Randomly choose one track from the matches
-    track_id = random.choice(match['track_id'].tolist())
 
-    # Generate Spotify embed HTML for that track
-    embed_html = f"""<!DOCTYPE html>
+def generate_embed_html(track_id: str) -> str:
+    """
+    Generates a complete Spotify track player iframe inside an HTML wrapper.
+    """
+    return f"""<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -58,4 +71,13 @@ def get_recommendation(mood, genre):
 </body>
 </html>"""
 
-    return embed_html
+
+def get_recommendation(mood: str, genre: str) -> str | None:
+    """
+    Backwards-compatible recommendation helper.
+    Finds a matching track and generates the Spotify embed HTML.
+    """
+    track_id = get_recommended_track(mood, genre)
+    if not track_id:
+        return None
+    return generate_embed_html(track_id)
