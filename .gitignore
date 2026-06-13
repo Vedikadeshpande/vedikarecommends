@@ -12,8 +12,6 @@ venv/
 .cache
 *.log
 .mypy_cache/
-.pytest_cache/
-.ipynb_checkpoints/
 
 # Node.js & Next.js build files
 node_modules/
@@ -35,14 +33,10 @@ frontend/*.tsbuildinfo
 *.njsproj
 *.sln
 *.sw?
-*.swo
-*.swp
 
 # OS metadata
 .DS_Store
 Thumbs.db
-ehthumbs.db
-Icon?
 
 # Local environment variables
 .env
@@ -50,20 +44,13 @@ Icon?
 .env.development.local
 .env.test.local
 .env.production.local
-*.env
 
 # Generated / runtime files
 recommendation.html
 
 # Large raw assets & archives (keeps GitHub repo size small)
 *.zip
-*.tar
-*.gz
-*.rar
-*.7z
 *.mp4
-*.avi
-*.mkv
 Gemini_Generated_Image_*.png
 Frame for Animation/
 
