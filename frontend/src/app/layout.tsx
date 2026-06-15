@@ -21,9 +21,9 @@ export const metadata: Metadata = {
     'vedikarecommends is an intelligent music discovery platform that recommends songs based on your emotions. Describe how you feel, pick a genre, and discover your perfect track.',
   keywords: ['music', 'mood', 'recommendation', 'discovery', 'emotion', 'spotify'],
   openGraph: {
-    title: 'vedikarecommends — Your Mood, Your Music',
+    title: 'vedikarecommends',
     description:
-      'Discover music that matches your mood. AI-powered emotion detection meets curated playlists.',
+      'Discover music that matches your mood.',
     type: 'website',
     siteName: 'vedikarecommends',
   },
